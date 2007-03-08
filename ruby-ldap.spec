@@ -1,4 +1,5 @@
 Summary:	LDAP API (RFC1823) library module for Ruby
+Summary(pl.UTF-8):	Biblioteka dostępu do LDAP (RFC1823) dla języka Ruby
 Name:		ruby-ldap
 Version:	0.9.7
 Release:	1
@@ -19,6 +20,13 @@ to some LDAP libraries (for example, OpenLDAP, UMich LDAP, Netscape
 SDK and ActiveDirectory). The common API for application development
 is described in RFC1823 and most libraries comply with it. Ruby/LDAP
 supports those libraries.
+
+%description -l pl.UTF-8
+Ruby/LDAP jest modułem rozszerzającym dla języka Ruby. Dostarcza on
+interfejs do niektórych bibliotek LDAP (np. OpenLDAP, Netscape SDK i
+ActiveDirectory). Wspólne API dla rozwoju aplikacji jest opisane w
+RFC1823 i większość bibliotek go przestrzega. Ruby/LDAP wspiera te
+biblioteki.
 
 %prep
 %setup -q
