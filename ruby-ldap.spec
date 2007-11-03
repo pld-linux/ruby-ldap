@@ -8,7 +8,7 @@ Group:		Development/Libraries
 Source0:	http://dl.sourceforge.net/ruby-ldap/%{name}-%{version}.tar.gz
 # Source0-md5:	373d07cb833fac6d907652f7c8ac7480
 URL:		http://ruby-ldap.sourceforge.net/
-BuildRequires:	openldap-devel
+BuildRequires:	openldap-devel >= 2.4.6
 BuildRequires:	openssl-devel
 BuildRequires:	ruby
 BuildRequires:	ruby-devel
