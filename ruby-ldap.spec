@@ -69,9 +69,6 @@ rdoc --op rdoc lib
 # rm -r ri/NOT_THIS_MODULE_RELATED_DIRS
 rm ri/created.rid
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{ruby_rubylibdir},%{ruby_ridir},%{ruby_rdocdir}}
@@ -83,6 +80,9 @@ install -d $RPM_BUILD_ROOT{%{ruby_rubylibdir},%{ruby_ridir},%{ruby_rdocdir}}
 
 cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
 cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
