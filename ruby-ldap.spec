@@ -1,20 +1,21 @@
+%define pkgname ldap
 Summary:	LDAP API (RFC1823) library module for Ruby
 Summary(pl.UTF-8):	Moduł języka Ruby dostępu do bibliotek API LDAP (RFC1823)
-Name:		ruby-ldap
-Version:	0.9.10
+Name:		ruby-%{pkgname}
+Version:	0.9.16
 Release:	1
 License:	Redistributable
 Group:		Development/Libraries
 Source0:	http://rubygems.org/downloads/%{name}-%{version}.gem
-# Source0-md5:	99b0bad43d31d67e3c6c9605bd48c168
+# Source0-md5:	5987d115aac49343b29240d291164f7a
 URL:		http://github.com/alexey-chebotar/ruby-ldap
 BuildRequires:	openldap-devel >= 2.4.6
 BuildRequires:	openssl-devel
-BuildRequires:	rpmbuild(macros) >= 1.484
+BuildRequires:	rpm-rubyprov
+BuildRequires:	rpmbuild(macros) >= 1.665
 BuildRequires:	ruby >= 1:1.8.6
 BuildRequires:	ruby-devel
 BuildRequires:	ruby-modules
-%{?ruby_mod_ver_requires_eq}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -56,27 +57,25 @@ ri documentation for %{name}.
 Dokumentacji w formacie ri dla %{name}.
 
 %prep
-%setup -q -c
-%{__tar} xf %{SOURCE0} -O data.tar.gz | %{__tar} xz
-find -newer README -o -print | xargs touch --reference %{SOURCE0}
+%setup -q -n %{pkgname}-%{version}
 
 %build
-ruby extconf.rb --with-openldap2
+ruby extconf.rb \
+	--vendor \
+	--with-openldap2
 %{__make}
 
 rdoc --ri --op ri lib
 rdoc --op rdoc lib
-# rm -r ri/NOT_THIS_MODULE_RELATED_DIRS
 rm ri/created.rid
+rm ri/cache.ri
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{ruby_rubylibdir},%{ruby_ridir},%{ruby_rdocdir}}
+install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir}/%{pkgname},%{ruby_ridir},%{ruby_rdocdir}}
 
 %{__make} install \
-	archdir=$RPM_BUILD_ROOT%{ruby_archdir} \
-	sitelibdir=$RPM_BUILD_ROOT%{ruby_rubylibdir} \
-	sitearchdir=$RPM_BUILD_ROOT%{ruby_archdir}
+	DESTDIR=$RPM_BUILD_ROOT
 
 cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
 cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
@@ -87,8 +86,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog FAQ NOTES README TODO test
-%attr(755,root,root) %{ruby_archdir}/ldap.so
-%{ruby_rubylibdir}/ldap*
+%attr(755,root,root) %{ruby_vendorarchdir}/ldap.so
+%{ruby_vendorlibdir}/ldap
 
 %files rdoc
 %defattr(644,root,root,755)
