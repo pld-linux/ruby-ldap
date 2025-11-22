@@ -3,7 +3,7 @@ Summary:	LDAP API (RFC1823) library module for Ruby
 Summary(pl.UTF-8):	Moduł języka Ruby dostępu do bibliotek API LDAP (RFC1823)
 Name:		ruby-%{pkgname}
 Version:	0.9.16
-Release:	8
+Release:	9
 License:	Redistributable
 Group:		Development/Libraries
 Source0:	http://rubygems.org/downloads/%{name}-%{version}.gem
