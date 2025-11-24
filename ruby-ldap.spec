@@ -59,7 +59,7 @@ ri documentation for %{name}.
 Dokumentacji w formacie ri dla %{name}.
 
 %prep
-%setup -q -n %{pkgname}-%{version}
+%setup -q
 
 %build
 ruby extconf.rb \
